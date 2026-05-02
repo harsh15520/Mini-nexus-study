@@ -1,11 +1,3 @@
-#Mini-Nexus uses Python standard library only.
-#No external dependencies required.
-# Python 3.8+ recommendended
-python-dotenv
-rich
-graphviz
-pandas
-altair
+# Mini-Nexus dependencies
+# Python 3.8+ recommended.
 streamlit>=1.30.0
-rich>=13.7.0
-watchdog>=4.0.0
