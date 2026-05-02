@@ -1,0 +1,81 @@
+{
+  "source_file": "mini_nexus.py",
+  "imports": [
+    "os",
+    "collections.defaultdict",
+    "sys",
+    "ast",
+    "json"
+  ],
+  "classes": {},
+  "function_call_map": {
+    "parse_file": [
+      "open",
+      "read",
+      "parse"
+    ],
+    "extract_functions": [
+      "list",
+      "dict",
+      "walk",
+      "set",
+      "isinstance",
+      "defaultdict",
+      "append"
+    ],
+    "extract_classes": [
+      "walk",
+      "isinstance"
+    ],
+    "extract_imports": [
+      "list",
+      "walk",
+      "set",
+      "isinstance",
+      "append"
+    ],
+    "build_knowledge_graph": [
+      "keys",
+      "extract_functions",
+      "extract_imports",
+      "list",
+      "items",
+      "values",
+      "set",
+      "basename",
+      "len",
+      "max",
+      "extract_classes",
+      "parse_file"
+    ],
+    "generate_mermaid": [
+      "items",
+      "append",
+      "join",
+      "replace"
+    ],
+    "print_report": [
+      "join",
+      "print",
+      "items"
+    ],
+    "main": [
+      "build_knowledge_graph",
+      "len",
+      "print_report",
+      "generate_mermaid",
+      "exit",
+      "print",
+      "open",
+      "dump",
+      "exists"
+    ]
+  },
+  "summary": {
+    "total_functions": 8,
+    "total_classes": 0,
+    "total_imports": 5,
+    "most_called": "walk",
+    "isolated_functions": []
+  }
+}
