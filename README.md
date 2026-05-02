@@ -1,43 +1,39 @@
-🧠 Mini-Nexus: Structural Awareness Engine
-"Don't just read code. Understand it."
-A micro-implementation of the GitNexus concept — built to understand how AI agents can gain structural awareness of a codebase before making edits.
-🔍 What Is This?
-Most AI coding tools (Cursor, Claude Code, Windsurf) edit your code blind — they see the file you're in, but not the 47 other functions that depend on it.
-GitNexus solves this at scale using Tree-sitter ASTs + a knowledge graph database.
-Mini-Nexus simulates that same core idea using Python's built-in ast module — in a single file, zero dependencies.
-It answers one critical question before any AI touches your code:
-"If I change this function, what else breaks?"
-🏗️ Architecture
-Mermaid
-Pipeline Phases
-Phase
-What Happens
-1. Parse
-Reads .py file → builds Abstract Syntax Tree (no execution)
-2. Extract
-Walks the AST → finds functions, classes, imports
-3. Map
-For each function, records which other functions it calls
-4. Graph
-Outputs structured graph.json with full call map
-5. Visualize
-Generates Mermaid.js diagram + terminal report
-🚀 Usage
-Bash
-Sample Output
-Code
-🏛️ Architect's Critical Insights
-(These insights compare Mini-Nexus's approach to the full GitNexus implementation)
-✅ The Innovation
-Standard RAG guesses based on words. This approach knows based on structure. By parsing the AST, we map actual call chains — not semantic similarity. This means zero hallucinated dependencies. The AI knows before it acts.
-⚖️ The Trade-off
-The ast module only works on syntactically valid Python. For large monorepos with 1000+ files, cross-file resolution becomes the hard problem — this is why GitNexus uses Tree-sitter + KuzuDB (a native graph database). Mini-Nexus is intentionally single-file to stay learnable.
-🏆 Verdict
-This is the foundation of Agentic Coding in 2026. As AI agents take on larger autonomous tasks, they need pre-computed structural context — not runtime guessing. Mini-Nexus demonstrates the concept. GitNexus deploys it at production scale. Understanding this distinction is understanding the future of AI-assisted development.
-🔗 Inspired By
-GitNexus — The production-grade version of this idea
-MarkTechPost Article — Original write-up
-Python ast module — The unsung hero of static analysis
-📁 Files
-Code
-Built as part of a personal tech-insight portfolio. Concept credit: GitNexus by @abhigyanpatwari.
+# 🧠 Mini-Nexus: Decoding Structural Awareness
+
+> "Don't just read code. Understand its relationships."
+
+I was reading about **GitNexus** and how it provides AI agents with a "structural brain" for complex codebases. It sparked a question: *Could I replicate that core structural logic using just Python’s built-in tools?*
+
+**Mini-Nexus** is my weekend exploration into that question. It’s a micro-engine that uses Python's `ast` (Abstract Syntax Tree) module to map out function dependencies before an AI ever touches the code.
+
+---
+
+### 🔍 The "Why" behind this project
+Standard RAG (Retrieval-Augmented Generation) is powerful, but it's often **context-blind**. When an AI edits a function in `database.py`, it often misses the fact that several other modules depend on that specific signature.
+
+This project aims to solve the "Blind Edit" problem by answering: 
+**"If I change this specific function, what is the actual blast radius?"**
+
+---
+
+### 🏗️ How it Works (The Pipeline)
+Instead of relying on semantic similarity (which can be fuzzy), I built a deterministic pipeline:
+
+1.  **Parse:** Uses the Python `ast` module to read source code into a tree structure without executing it (Static Analysis).
+2.  **Extract:** Recursively walks the tree to identify every function definition and its associated call sites.
+3.  **Map:** Records these relationships into a structured JSON map.
+4.  **Visualize:** Generates a dependency graph to help a human (or an AI agent) see the code's architecture at a glance.
+
+Architect's Critical Insights
+The Win: Unlike vector-based search, this approach is deterministic. It doesn't "guess" based on word proximity; it "knows" based on the actual logic tree. This effectively eliminates hallucinated dependencies.
+The Trade-off: While production tools like GitNexus use Tree-sitter and KuzuDB for massive multi-language monorepos, I intentionally kept this implementation single-file and Python-native to master the logic before the tooling.
+The Verdict: This is the foundation of Agentic Coding. As AI agents move from writing snippets to managing entire repositories, they need pre-computed structural context.
+#### Architecture Map
+```mermaid
+graph TD
+    A[Source Code .py] --> B[AST Parser]
+    B --> C[Dependency Extractor]
+    C --> D[Knowledge Graph - JSON]
+    D --> E[Claude/Agentic UI]
+    style B fill:#fdf,stroke:#333,stroke-width:2px
+    style D fill:#ddf,stroke:#333,stroke-width:2px
